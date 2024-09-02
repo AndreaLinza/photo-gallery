@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Album;
 use App\Models\Photo;
@@ -17,9 +18,8 @@ Route::get('/dashboard', function () {
 Route::get('/users', function(){
     return User::with('albums')->paginate(100);
 });
-Route::get('/albums', function(){
-    return Album::with('photos')->paginate(5);
-});
+//Route::get('/albums', [AlbumsController::class, 'index']);
+Route::resource('albums', AlbumsController::class);
 Route::get('/photo', function(){
     return Photo::paginate(5);
 });
