@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-// use App\Models\User;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -40,6 +40,6 @@ class UserSeeder extends Seeder
         // }
 
         // ALTRIMENTI SI UTILIZZA LA FACTORY
-        \App\Models\User::factory(30)->create();
+        User::factory(30)->create();
     }
 }

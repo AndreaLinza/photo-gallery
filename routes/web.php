@@ -14,14 +14,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/users', function(){
+    return User::with('albums')->paginate(100);
+});
 Route::get('/albums', function(){
-    return Album::paginate(5);
+    return Album::with('photos')->paginate(5);
 });
 Route::get('/photo', function(){
     return Photo::paginate(5);
-});
-Route::get('/users', function(){
-    return User::with('albums')->paginate(100);
 });
 
 Route::middleware('auth')->group(function () {

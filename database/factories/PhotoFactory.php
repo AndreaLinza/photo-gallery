@@ -18,7 +18,7 @@ class PhotoFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(60),
+            'name' => fake()->text(20),
             'description' => fake()->text(128),
             'img_path' => fake()->imageUrl(),
             'album_id' => Album::factory(),
