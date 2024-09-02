@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('album_id');
             $table->foreign('album_id')->on('albums')->references('id')->onDelete('cascade');
             $table->string('name', 128);
             $table->text('description')->nullable();
             $table->string('img_path');
+            $table->foreignId('album_id');
             $table->timestamps();
             $table->softDeletes();
         });

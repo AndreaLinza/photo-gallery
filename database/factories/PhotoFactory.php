@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Album;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Album>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Photo>
  */
-class AlbumFactory extends Factory
+class PhotoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +18,10 @@ class AlbumFactory extends Factory
     public function definition(): array
     {
         return [
-            'album_name' => fake()->text(20),
-            'album_thumb' => fake()->imageUrl(),
-            'description' => fake()->text(100),
-            'user_id' => User::factory(),
+            'name' => fake()->text(60),
+            'description' => fake()->text(128),
+            'img_path' => fake()->imageUrl(),
+            'album_id' => Album::factory(),
             'created_at' => fake()->dateTime(),
         ];
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Models\Album;
+use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/albums', function(){
     return Album::paginate(5);
+});
+Route::get('/photo', function(){
+    return Photo::paginate(5);
 });
 Route::get('/users', function(){
     return User::with('albums')->paginate(100);
