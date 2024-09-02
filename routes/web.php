@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Album;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -12,8 +13,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/albums', function(){
+    return Album::paginate(5);
+});
 Route::get('/users', function(){
-    return User::paginate(5);
+    return User::with('albums')->paginate(100);
 });
 
 Route::middleware('auth')->group(function () {
