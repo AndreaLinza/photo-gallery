@@ -26,7 +26,8 @@ class AlbumsController extends Controller
         }
         // $sql .= ' WHERE '. $where;
         //dd($sql);
-        return DB::select($sql, $where);
+        $albums = DB::select($sql, $where);
+        return view('albums', ['albums' => $albums]);
     }
 
     /**
@@ -72,8 +73,9 @@ class AlbumsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Album $album)
+    public function destroy(int $album)
     {
-        //
+        $sql = "DELETE FROM albums WHERE id=:id";
+        DB::delete($sql, ['id' => $album]);
     }
 }
