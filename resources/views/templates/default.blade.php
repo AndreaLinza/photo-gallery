@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>@yield('title')</title>
+    <title>@yield('title', 'Home')</title>
 
-    @vite(['resources/js/app.js'])
+    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -27,8 +27,9 @@
     </main>
 
     {{-- FOOTER --}}
-    @include('partials.footer')
-
+    @section('footer')
+        @include('partials.footer')
+    @show
 
 </body>
 
