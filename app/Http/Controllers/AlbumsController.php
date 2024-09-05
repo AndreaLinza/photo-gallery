@@ -28,7 +28,7 @@ class AlbumsController extends Controller
         // $sql .= ' WHERE '. $where;
         //dd($sql);
         $albums = DB::select($sql, $where);
-        return view('albums', ['albums' => $albums]);
+        return view('albums.albums', ['albums' => $albums]);
     }
 
     /**
@@ -50,9 +50,10 @@ class AlbumsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Album $album)
+    public function show($id)
     {
-        //
+        $sql = "select * FROM albums WHERE id=:id";
+        return DB::select($sql, ['id' => $id]);
     }
 
     /**
@@ -60,7 +61,9 @@ class AlbumsController extends Controller
      */
     public function edit(Album $album)
     {
-        //
+        // $sql = "select * FROM albums WHERE id=:id";
+        // $albumEdit = DB::select($sql, ['id' => $album->id]);
+        return view('albums.edit-album')->withAlbum($album);
     }
 
     /**
@@ -68,7 +71,14 @@ class AlbumsController extends Controller
      */
     public function update(Request $request, Album $album)
     {
-        //
+        $data = $request->only(['album_name', 'description']);
+        $data['id'] = $album->id;
+        $query = 'UPDATE albums set album_name=:album_name, description=:description where id=:id';
+        $res = DB::update($query, $data);
+        $message = 'Album con id='.$album->id;
+        $message .= $res ? ' aggiornato' : ' non aggiornato' ;
+        session()->flash('message', $message);
+        return redirect()->route('albums.index');
     }
 
     /**
