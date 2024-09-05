@@ -9,6 +9,7 @@
 @if(session()->has('message'))
 <x-alert-info/>
 @endif
+<a href="{{route('albums.create')}}" class="btn btn-secondary py-2 my-2 d-block w-25 ms-auto">Aggiungi album</a>
 <ul class="list-group">
     @foreach($albums as $album)
     <li class="list-group-item d-flex justify-content-between">
