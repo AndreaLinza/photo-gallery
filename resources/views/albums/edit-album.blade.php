@@ -1,3 +1,9 @@
+@php
+    /**
+    * @var $album App\Models\Album;
+     */
+@endphp
+
 @extends('templates.default')
 @section('content')
 
