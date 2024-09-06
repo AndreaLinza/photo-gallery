@@ -42,11 +42,10 @@ class AlbumsController extends Controller
     {
         $data = $request->only(['album_name', 'description']);
         $data['user_id'] = 1;
-        $data['album_thumb'] = '';
-        $query = 'INSERT INTO albums (album_name, description, user_id, album_thumb) values(:album_name, :description, :user_id, :album_thumb)';
-        $res = DB::insert($query, $data);
+        $data['album_thumb'] = '/';
+        $queryBuilder = DB::table('albums')->insert($data);
         $message = 'Album '. $data['album_name'];
-        $message .= $res ? ' Creato' : ' Non Creato' ;
+        $message .= $queryBuilder ? ' Creato' : ' Non Creato' ;
         session()->flash('message', $message);
         return redirect()->route('albums.index');
     }
@@ -77,11 +76,9 @@ class AlbumsController extends Controller
     public function update(Request $request, Album $album)
     {
         $data = $request->only(['album_name', 'description']);
-        $data['id'] = $album->id;
-        $query = 'UPDATE albums set album_name=:album_name, description=:description where id=:id';
-        $res = DB::update($query, $data);
+        $queryBuilder = DB::table('albums')->where('id', $album->id)->update($data);
         $message = 'Album con id='.$album->id;
-        $message .= $res ? ' aggiornato' : ' non aggiornato' ;
+        $message .= $queryBuilder ? ' aggiornato' : ' non aggiornato' ;
         session()->flash('message', $message);
         return redirect()->route('albums.index');
     }
