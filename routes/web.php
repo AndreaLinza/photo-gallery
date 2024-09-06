@@ -18,13 +18,20 @@ Route::get('/dashboard', function () {
 Route::get('/users', function(){
     return User::with('albums')->paginate(100);
 });
-//Route::get('/albums', [AlbumsController::class, 'index']);
+
 Route::resource('albums', AlbumsController::class);
-// Route::delete('/albums/{album}', [AlbumsController::class, 'delete']);
-// Route::get('/albums/{album}', [AlbumsController::class, 'show']);
 
 Route::get('/photo', function(){
     return Photo::paginate(5);
+});
+
+Route::get('usersnoalbums', function(){
+    $usersnoalbum = DB::table('users as u')
+    ->leftJoin('albums as a', 'u.id', 'a.user_id')
+    ->select('u.id','email','name')
+    ->whereNull('album_name')
+    ->get();
+    return $usersnoalbum;
 });
 
 Route::middleware('auth')->group(function () {

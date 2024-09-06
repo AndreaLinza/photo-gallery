@@ -40,6 +40,6 @@ class UserSeeder extends Seeder
         // }
 
         // ALTRIMENTI SI UTILIZZA LA FACTORY
-        User::factory(30)->create();
+        User::create();
     }
 }

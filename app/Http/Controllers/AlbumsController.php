@@ -14,7 +14,7 @@ class AlbumsController extends Controller
      */
     public function index(Request $request)
     {
-        $queryBuilder = DB::table('albums')->orderByDesc('id');
+        $queryBuilder = Album::orderByDesc('id');
         if($request->has('id')){
             $queryBuilder->where('id', '=', $request->input('id'));
         }
@@ -76,7 +76,7 @@ class AlbumsController extends Controller
     public function update(Request $request, Album $album)
     {
         $data = $request->only(['album_name', 'description']);
-        $queryBuilder = DB::table('albums')->where('id', $album->id)->update($data);
+        $queryBuilder = Album::where('id', $album->id)->update($data);
         $message = 'Album con id='.$album->id;
         $message .= $queryBuilder ? ' aggiornato' : ' non aggiornato' ;
         session()->flash('message', $message);
@@ -86,10 +86,16 @@ class AlbumsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $album)
+    public function destroy(Album $album)
     {
-        $queryBuilder = DB::table('albums')->where('id', $album)->delete();
-        return $queryBuilder;
+        // $queryBuilder = Album::where('id', $album)->delete();
+        // return $queryBuilder;
+        /*-------------- OR ----------------------*/
+        // return Album::findOrFail($album)->delete();
+        /*-------------- OR ----------------------*/
+        // return +$album->delete();
+        /*-------------- OR ----------------------*/
+        return Album::destroy($album);
     }
 
 }
