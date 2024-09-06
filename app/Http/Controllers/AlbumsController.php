@@ -14,21 +14,17 @@ class AlbumsController extends Controller
      */
     public function index(Request $request)
     {
-        //return Album::all();
-        $sql = 'select * from albums WHERE 1=1 ';
-        $where = [];
+        $queryBuilder = DB::table('albums')->orderByDesc('id');
         if($request->has('id')){
-            $where['id'] = $request->get('id');
-            $sql .= " AND ID=:id";
+            $queryBuilder->where('id', '=', $request->input('id'));
         }
         if($request->has('album_name')){
-            $where['album_name'] = $request->get('album_name');
-            $sql .= " AND album_name=:album_name";
+            $queryBuilder->where('album_name', 'like', '%'.$request->input('album_name').'%');
         }
-        $sql .= " ORDER BY id DESC";
+        $albums  = $queryBuilder->get();
 
-        $albums = DB::select($sql, $where);
         return view('albums.albums', ['albums' => $albums]);
+
     }
 
     /**
@@ -93,15 +89,10 @@ class AlbumsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $album): int
+    public function destroy(int $album)
     {
-        $sql = "DELETE FROM albums WHERE id=:id";
-        return DB::delete($sql, ['id' => $album]);
+        $queryBuilder = DB::table('albums')->where('id', $album)->delete();
+        return $queryBuilder;
     }
 
-    public function delete(int $album): int
-    {
-        $sql = "DELETE FROM albums WHERE id=:id";
-        return DB::delete($sql, ['id' => $album]);
-    }
 }

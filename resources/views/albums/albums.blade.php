@@ -33,7 +33,7 @@
             $('ul').on('click', 'a.btn-danger', function (evt) {
                 evt.preventDefault();
                 const urlAlbum = $(this).attr('href');
-                const li = evt.target.parentNode;
+                const li = evt.target.parentNode.parentNode;
                 console.log(li)
                 $.ajax(urlAlbum, {
                     method: 'DELETE',
@@ -55,14 +55,5 @@
             });
         });
 
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     alert('dom')
-        //     document.querySelectorAll('li a.btn-danger').forEach(ele => {
-        //         ele.addEventListener('click', (evt) => {
-        //             evt.preventDefault();
-        //             alert(evt.target.getAttribute('href'))
-        //         })
-        //     })
-        // });
 </script>
 @endsection
