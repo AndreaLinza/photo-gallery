@@ -76,9 +76,10 @@ class AlbumsController extends Controller
     public function update(Request $request, Album $album)
     {
         $data = $request->only(['album_name', 'description']);
-        $queryBuilder = Album::where('id', $album->id)->update($data);
-        $message = 'Album con id='.$album->id;
-        $message .= $queryBuilder ? ' aggiornato' : ' non aggiornato' ;
+        $res = $album->update($data);
+        // $queryBuilder = Album::where('id', $album->id)->update($data);
+        $message =  'Album con id='.$album->id;
+        $message .= $res ? 'Album ' .$album->album_name .  ' aggiornato' : ' non aggiornato' ;
         session()->flash('message', $message);
         return redirect()->route('albums.index');
     }
