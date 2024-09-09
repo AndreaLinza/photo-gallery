@@ -11,7 +11,17 @@ class Album extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function photos(){
+    protected $fillable = [
+        'album_name',
+        'album_thumb',
+        'description',
+        'user_id',
+
+    ];
+    protected $garded = ['id'];
+
+    public function photos()
+    {
         return $this->hasMany(Photo::class);
     }
 }

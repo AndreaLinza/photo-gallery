@@ -43,7 +43,14 @@ class AlbumsController extends Controller
         $data = $request->only(['album_name', 'description']);
         $data['user_id'] = 1;
         $data['album_thumb'] = '/';
-        $queryBuilder = DB::table('albums')->insert($data);
+
+        $album = new Album();
+        $album->album_name = $data['album_name'];
+        $album->album_thumb = '/';
+        $album->description = $data['description'];
+        $album->user_id = 1;
+        $queryBuilder = Album::create($data);
+        // $queryBuilder = Album::insert($data);
         $message = 'Album '. $data['album_name'];
         $message .= $queryBuilder ? ' Creato' : ' Non Creato' ;
         session()->flash('message', $message);
@@ -54,10 +61,9 @@ class AlbumsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Album $album)
     {
-        $sql = "select * FROM albums WHERE id=:id";
-        return DB::select($sql, ['id' => $id]);
+        return $album;
     }
 
     /**
@@ -76,9 +82,10 @@ class AlbumsController extends Controller
     public function update(Request $request, Album $album)
     {
         $data = $request->only(['album_name', 'description']);
-        $queryBuilder = DB::table('albums')->where('id', $album->id)->update($data);
-        $message = 'Album con id='.$album->id;
-        $message .= $queryBuilder ? ' aggiornato' : ' non aggiornato' ;
+        $queryBuilder = $album->update($data);
+        // $queryBuilder = Album::where('id', $album->id)->update($data);
+        $message =  'Album con id='.$album->id;
+        $message .= $queryBuilder ? 'Album ' .$album->album_name .  ' aggiornato' : ' non aggiornato' ;
         session()->flash('message', $message);
         return redirect()->route('albums.index');
     }
@@ -86,10 +93,16 @@ class AlbumsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $album)
+    public function destroy(Album $album)
     {
-        $queryBuilder = DB::table('albums')->where('id', $album)->delete();
-        return $queryBuilder;
+        // $queryBuilder = Album::where('id', $album)->delete();
+        // return $queryBuilder;
+        /*-------------- OR ----------------------*/
+        // return Album::findOrFail($album)->delete();
+        /*-------------- OR ----------------------*/
+        // return +$album->delete();
+        /*-------------- OR ----------------------*/
+        return Album::destroy($album);
     }
 
 }

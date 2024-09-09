@@ -22,7 +22,7 @@ class AlbumFactory extends Factory
             'album_thumb' => fake()->imageUrl(),
             'description' => fake()->text(100),
             'user_id' => User::factory(),
-            'created_at' => fake()->dateTime(),
+            'created_at' => fake()->date(),
         ];
     }
 }
