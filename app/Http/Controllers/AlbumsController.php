@@ -14,7 +14,7 @@ class AlbumsController extends Controller
      */
     public function index(Request $request)
     {
-        $queryBuilder = DB::table('albums')->orderByDesc('id');
+        $queryBuilder = Album::orderByDesc('id');
         if($request->has('id')){
             $queryBuilder->where('id', '=', $request->input('id'));
         }
