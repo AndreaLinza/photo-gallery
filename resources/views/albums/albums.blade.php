@@ -7,14 +7,26 @@
     <input id="_token" type="hidden" name="_token" value="{{csrf_token()}}">
 </form>
 @if(session()->has('message'))
-<x-alert-info/>
+<x-alert-info />
 @endif
 <a href="{{route('albums.create')}}" class="btn btn-secondary py-2 my-2 d-block w-25 ms-auto">Aggiungi album</a>
 <ul class="list-group">
     @foreach($albums as $album)
     <li class="list-group-item d-flex justify-content-between">
-        <div>
+        <div class="d-flex align-items-center justify-content-between w-50">
             ({{$album->id}}) {{$album->album_name}}
+            @if($album->album_thumb)
+            <div class="mb-3">
+                <img width="300" src="{{asset($album->path)}}" alt="{{$album->name}}"
+                    title="{{$album->name}}">
+            </div>
+            @else
+            <div class="mb-3">
+                <img width="300" src="{{$album->album_thumb}}" alt="{{$album->name}}"
+                    title="{{$album->name}}">
+            </div>
+
+            @endif
         </div>
         <div>
             <a href="{{route('albums.edit', ['album' => $album->id])}}" class="btn btn-warning">UPDATE</a>
