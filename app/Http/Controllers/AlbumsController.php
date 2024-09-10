@@ -149,12 +149,15 @@ class AlbumsController extends Controller
         // return +$album->delete();
         /*-------------- OR ----------------------*/
         //return Album::destroy($album);
-        return +$album->delete();
+
+        $thumbnail = $album->album_thumb;
+        $res = $album->delete();
+        if($thumbnail){
+            \Storage::delete($thumbnail);
+        }
+
+        return $res;
     }
 
-    public function delete(Album $album): int
-    {
-        return $this->destroy($album);
-    }
 
 }
