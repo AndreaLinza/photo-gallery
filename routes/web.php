@@ -20,6 +20,7 @@ Route::get('/users', function(){
 });
 
 Route::resource('albums', AlbumsController::class);
+Route::delete('/albums/{album}/delete', [AlbumsController::class, 'delete']);
 
 Route::get('/photo', function(){
     return Photo::paginate(5);

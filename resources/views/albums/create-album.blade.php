@@ -2,17 +2,17 @@
 @section('content')
 
 <h1>CREATE NEW   ALBUM </h1>
-<form method="POST" action="{{route('albums.store')}}">
+<form method="POST" action="{{route('albums.store')}}" enctype="multipart/form-data">
     @csrf()
     @method('POST')
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="album_name">Nome Album</label>
-        <input required class="form-control" name="album_name" id="album_name" type="text" value="">
+        <input type="text" required class="form-control" name="album_name" id="album_name">
     </div>
+    @include("albums.partials.fileupload")
     <div class="form-group">
         <label for="description">Descrizione</label>
-        <textarea required class="form-control" name="description" id="description"
-            type="text"></textarea>
+        <textarea type="text" required class="form-control" name="description" id="description"></textarea>
     </div>
     <div class="form-group pt-4">
         <button class="btn btn-primary">Salva</button>
