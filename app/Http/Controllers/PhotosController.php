@@ -31,6 +31,19 @@ class PhotosController extends Controller
         //
     }
 
+    public function processFile(Request $request, Photo $photo): void
+    {
+        $file = $request->file('img_path');
+
+        $filename = $photo->id . '.' . $file->extension();
+        $thumbnail = $file->storeAs(
+            config('filesystems.img_dir' . $photo->album_id),
+            $filename,
+            ['disk' => 'public']
+        );
+        $photo->img_path = $thumbnail;
+    }
+
     /**
      * Display the specified resource.
      */
@@ -43,17 +56,26 @@ class PhotosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Photo $photo)
     {
-        //
+        return view("images.edit-image", compact("photo"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Photo $photo)
     {
-        //
+        $data = $request->only(['name', 'description']);
+        $photo->name = $data['name'];
+        $photo->description = $data['description'];
+        if ($request->hasFile('img_path')) {
+            $this->processFile($request, $photo);
+        }
+        $res = $photo->save();
+        $messaggio = $res ? 'Foto   ' . $photo->name . ' Updated' : 'Foto ' . $photo->name . ' was not updated';
+        session()->flash('message', $messaggio);
+        return redirect()->route('albums.images', ['album' => $photo->album]);
     }
 
     /**

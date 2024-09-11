@@ -1,5 +1,9 @@
 @extends('templates.default')
 @section('content')
+<h1>IMAGES</h1>
+@if(session()->has('message'))
+<x-alert-info>{{session()->get('message')}}</x-alert-info>
+@endif
 <table class="table table-bordered">
     <thead>
 
@@ -9,6 +13,7 @@
             <th>TITLE</th>
             <th>ALBUM</th>
             <th>THUMBNAIL</th>
+            <th>UPDATE</th>
             <th>DELETE</th>
 
         </tr>
@@ -21,8 +26,9 @@
             <td>{{$image->created_at}}</td>
             <td>{{$image->name}}</td>
             <td>{{$album->album_name}}</td>
-            <td><img width="120" src="{{asset($image->img_path)}}" alt=""></td>
-            <td><a class="btn btn-danger my-2 d-block" href="{{route('photos.destroy', $image)}}">DELETE</a></td>
+            <td><img width="120" src="{{asset($image->path)}}" alt=""></td>
+            <td><a class="btn btn-warning d-block" href="{{route('photos.edit', $image)}}">UPDATE</a></td>
+            <td><a class="btn btn-danger d-block" href="{{route('photos.destroy', $image)}}">DELETE</a></td>
         </tr>
 
         @empty
@@ -40,6 +46,7 @@
 @parent
 <script>
     $('document').ready(function () {
+        $('div.alert-info').fadeOut(3000);
             $('table').on('click', 'a.btn-danger', function (evt) {
                 evt.preventDefault();
                 const urlImage = $(this).attr('href');
@@ -68,4 +75,3 @@
 
 </script>
 @endsection
-

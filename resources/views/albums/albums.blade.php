@@ -7,7 +7,7 @@
     <input id="_token" type="hidden" name="_token" value="{{csrf_token()}}">
 </form>
 @if(session()->has('message'))
-<x-alert-info />
+<x-alert-info>{{session()->get('message')}}</x-alert-info>
 @endif
 <a href="{{route('albums.create')}}" class="btn btn-secondary py-2 my-2 d-block w-25 ms-auto">Aggiungi album</a>
 <ul class="list-group">
