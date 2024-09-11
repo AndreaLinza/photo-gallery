@@ -36,6 +36,9 @@
         </div>
     </li>
     @endforeach
+    <li class="list-group-item">
+        {{$albums->links('vendor.pagination.bootstrap-5')}}
+    </li>
 </ul>
 @endsection
 @section('footer')

@@ -4,7 +4,7 @@
 @if(session()->has('message'))
 <x-alert-info>{{session()->get('message')}}</x-alert-info>
 @endif
-<table class="table table-bordered">
+<table class="table table-striped">
     <thead>
 
         <tr>
@@ -33,11 +33,16 @@
 
         @empty
         <tr>
-            <td colspan="5">
+            <td colspan="7">
                 No images found
             </td>
         </tr>
         @endforelse
+        <tr>
+            <td colspan="7">
+                {{$images->links('vendor.pagination.bootstrap-5')}}
+            </td>
+        </tr>
     </tbody>
 </table>
 @endsection
