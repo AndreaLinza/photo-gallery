@@ -17,19 +17,20 @@
             ({{$album->id}}) {{$album->album_name}}
             @if($album->album_thumb)
             <div class="mb-3">
-                <img width="300" src="{{asset($album->path)}}" alt="{{$album->name}}"
-                    title="{{$album->name}}">
+                <img width="300" src="{{asset($album->path)}}" alt="{{$album->name}}" title="{{$album->name}}">
             </div>
-            @else
-            <div class="mb-3">
-                <img width="300" src="{{$album->album_thumb}}" alt="{{$album->name}}"
-                    title="{{$album->name}}">
-            </div>
+            {{-- @else --}}
+            {{-- <div class="mb-3">
+                <img width="300" src="{{$album->album_thumb}}" alt="{{$album->name}}" title="{{$album->name}}">
+            </div> --}}
 
             @endif
         </div>
         <div>
-            <a href="{{route('albums.edit', ['album' => $album->id])}}" class="btn btn-warning">UPDATE</a>
+            @if($album->photos_count)
+            <a href="{{route('albums.images', $album)}}" class="btn btn-info">VIEW IMAGE({{$album->photos_count}})</a>
+            @endif
+            <a href="{{route('albums.edit', $album)}}" class="btn btn-warning">UPDATE</a>
             {{-- <a href="{{route('albums.destroy', ['album' => $album->id])}}" class="btn btn-danger">DELETE</a> --}}
             <a href="/albums/{{$album->id}}" class="btn btn-danger">DELETE</a>
         </div>

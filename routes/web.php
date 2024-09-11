@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumsController;
+use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Album;
 use App\Models\Photo;
@@ -20,20 +21,23 @@ Route::get('/users', function(){
 });
 
 Route::resource('albums', AlbumsController::class);
-Route::delete('/albums/{album}/delete', [AlbumsController::class, 'delete']);
+Route::get('/albums/{album}/images', [AlbumsController::class, 'getImages'])->name('albums.images');
+// Route::delete('/albums/{album}/delete', [AlbumsController::class, 'delete']);
 
 Route::get('/photo', function(){
     return Photo::paginate(5);
 });
 
-Route::get('usersnoalbums', function(){
-    $usersnoalbum = DB::table('users as u')
-    ->leftJoin('albums as a', 'u.id', 'a.user_id')
-    ->select('u.id','email','name')
-    ->whereNull('album_name')
-    ->get();
-    return $usersnoalbum;
-});
+Route::resource('photos', PhotosController::class);
+
+// Route::get('usersnoalbums', function(){
+//     $usersnoalbum = DB::table('users as u')
+//     ->leftJoin('albums as a', 'u.id', 'a.user_id')
+//     ->select('u.id','email','name')
+//     ->whereNull('album_name')
+//     ->get();
+//     return $usersnoalbum;
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

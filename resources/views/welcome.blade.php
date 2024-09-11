@@ -43,7 +43,7 @@
                   class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                   Log in
                 </a>
-    
+
                 @if (Route::has('register'))
                 <a href="{{ route('register') }}"
                   class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
@@ -51,10 +51,12 @@
                 </a>
                 @endif
                 @endauth
+
+                <a class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white" href="{{route('albums.index')}}">Albums</a>
               </nav>
               @endif
             </header>
-    
+
             <main class="mt-6">
               <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                 <a href="https://laravel.com/docs" id="docs-card"
@@ -74,7 +76,7 @@
                       class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900">
                     </div>
                   </div>
-    
+
                   <div class="relative flex items-center gap-6 lg:items-end">
                     <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
                       <div
@@ -86,10 +88,10 @@
                             d="m3.55 1.893 8 4.048a1.008 1.008 0 0 0 .9 0l8-4.048a1 1 0 0 0-.9-1.785l-7.322 3.706a.506.506 0 0 1-.452 0L4.454.108a1 1 0 0 0-.9 1.785H3.55Z" />
                         </svg>
                       </div>
-    
+
                       <div class="pt-3 sm:pt-5 lg:pt-0">
                         <h2 class="text-xl font-semibold text-black dark:text-white">Documentation</h2>
-    
+
                         <p class="mt-4 text-sm/relaxed">
                           Laravel has wonderful documentation covering every aspect of the framework. Whether you are a
                           newcomer or have prior experience with Laravel, we recommend reading our documentation from
@@ -97,7 +99,7 @@
                         </p>
                       </div>
                     </div>
-    
+
                     <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
                       viewBox="0 0 24 24" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round"
@@ -105,7 +107,7 @@
                     </svg>
                   </div>
                 </a>
-    
+
                 <a href="https://laracasts.com"
                   class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                   <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
@@ -116,22 +118,22 @@
                       </g>
                     </svg>
                   </div>
-    
+
                   <div class="pt-3 sm:pt-5">
                     <h2 class="text-xl font-semibold text-black dark:text-white">Laracasts</h2>
-    
+
                     <p class="mt-4 text-sm/relaxed">
                       Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them
                       out, see for yourself, and massively level up your development skills in the process.
                     </p>
                   </div>
-    
+
                   <svg class="size-6 shrink-0 self-center stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                   </svg>
                 </a>
-    
+
                 <a href="https://laravel-news.com"
                   class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                   <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
@@ -146,22 +148,22 @@
                       </g>
                     </svg>
                   </div>
-    
+
                   <div class="pt-3 sm:pt-5">
                     <h2 class="text-xl font-semibold text-black dark:text-white">Laravel News</h2>
-    
+
                     <p class="mt-4 text-sm/relaxed">
                       Laravel News is a community driven portal and newsletter aggregating all of the latest and most
                       important news in the Laravel ecosystem, including new package releases and tutorials.
                     </p>
                   </div>
-    
+
                   <svg class="size-6 shrink-0 self-center stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                   </svg>
                 </a>
-    
+
                 <div
                   class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
                   <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
@@ -172,10 +174,10 @@
                       </g>
                     </svg>
                   </div>
-    
+
                   <div class="pt-3 sm:pt-5">
                     <h2 class="text-xl font-semibold text-black dark:text-white">Vibrant Ecosystem</h2>
-    
+
                     <p class="mt-4 text-sm/relaxed">
                       Laravel's robust library of first-party tools and libraries, such as <a
                         href="https://forge.laravel.com"
@@ -207,7 +209,7 @@
                 </div>
               </div>
             </main>
-    
+
             <footer class="py-16 text-center text-sm text-black dark:text-white/70">
               Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
             </footer>

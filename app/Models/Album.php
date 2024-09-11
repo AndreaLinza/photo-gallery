@@ -33,5 +33,6 @@ class Album extends Model
         }
         return $url;
     }
+
 }
 
