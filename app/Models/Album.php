@@ -18,7 +18,7 @@ class Album extends Model
         'user_id',
 
     ];
-    protected $garded = ['id'];
+    protected $guarded = ['id'];
 
     public function photos()
     {

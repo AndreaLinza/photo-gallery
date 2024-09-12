@@ -17,6 +17,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{route('albums.create')}}">Nuovo Album</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('photos.create')}}">Nuova Immagine</a>
+            </li>
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
