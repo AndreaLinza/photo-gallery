@@ -7,6 +7,7 @@ use App\Models\Photo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use View;
 
 class AlbumsController extends Controller
 {
@@ -31,7 +32,7 @@ class AlbumsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('albums.create-album')->withAlbum(new Album());
     }
@@ -139,7 +140,7 @@ class AlbumsController extends Controller
     }
 
     public function getImages(Album $album){
-        $images = Photo::wherealbumId($album->id)->paginate(5);
+        $images = Photo::wherealbumId($album->id)->latest()->paginate(5);
         return view('images.album-images', compact('album','images'));
     }
 

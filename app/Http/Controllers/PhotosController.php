@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,11 @@ class PhotosController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $photo = new Photo();
+        $album = $request->album_id ? Album::findOrFail($request->album_id) : new Album();
+        return view("images.edit-image",compact("album","photo"));
     }
 
     /**
@@ -28,20 +31,34 @@ class PhotosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $photo = new Photo();
+       $photo->name = $request->input("name");
+       $photo->description = $request->input("description");
+       $photo->album_id = $request->input("album_id");
+       $this->processFile($request, $photo);
+       $photo->save();
+       return redirect(route('albums.images', $photo->album));
     }
 
     public function processFile(Request $request, Photo $photo): void
     {
-        $file = $request->file('img_path');
+        if ($request->hasFile('img_path')) {
+            $file = $request->file('img_path');
+            $name = preg_replace('@[^a-z]i@', '_', $photo->name);
 
-        $filename = $photo->id . '.' . $file->extension();
-        $thumbnail = $file->storeAs(
-            config('filesystems.img_dir' . $photo->album_id),
-            $filename,
-            ['disk' => 'public']
-        );
-        $photo->img_path = $thumbnail;
+            // Genera il nome del file
+            $filename = $name . '.' . $file->extension();
+
+            // Salva il file nella directory specificata con il nome generato
+            $thumbnail = $file->storeAs(
+                config('filesystems.img_dir') . '/' . $photo->album_id,
+                $filename,
+                ['disk' => 'public']
+            );
+
+            // Aggiorna il percorso dell'immagine nel database
+            $photo->img_path = $thumbnail;
+        }
     }
 
     /**
@@ -58,7 +75,8 @@ class PhotosController extends Controller
      */
     public function edit(Photo $photo)
     {
-        return view("images.edit-image", compact("photo"));
+        $album = $photo->album;
+        return view("images.edit-image", compact("photo", "album"));
     }
 
     /**

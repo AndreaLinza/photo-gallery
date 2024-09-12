@@ -6,28 +6,37 @@
 
 @extends('templates.default')
 @section('content')
+@if($photo->id)
 
-<h1>EDIT PHOTO {{$photo->name}}</h1>
-<form method="POST" action="{{route('photos.update', $photo)}}" enctype="multipart/form-data">
-    @csrf()
+    <h1>EDIT PHOTO {{$photo->name}}</h1>
+    <form method="POST" action="{{route('photos.update', $photo)}}" enctype="multipart/form-data">
+
     @method('PATCH')
-    <div class="form-group">
-        <label for="name">Nome Immagine</label>
-        <input class="form-control" name="name" id="name" type="text" value="{{$photo->name}}">
-    </div>
 
-    @include("images.partials.fileupload")
+    @else
+        <h1>NEW IMAGE FOR ALBUM {{$album->album_name}}</h1>
+        <form method="POST" action="{{route('photos.store')}}" enctype="multipart/form-data">
 
-    <div class="form-group">
-        <label for="description">Descrizione</label>
-        <textarea class="form-control" name="description" id="description"
-            type="text">{{$photo->description}}</textarea>
-    </div>
-    <div class="form-group pt-4">
-        <button class="btn btn-primary">Salva</button>
-        <a href="{{route('albums.images', ['album' => $photo->album])}}" class="btn btn-danger">Annulla</a>
+@endif
+        <input type="hidden" name="album_id" value="{{$album->id}}">
+        @csrf()
+        <div class="form-group">
+            <label for="name">Nome Immagine</label>
+            <input class="form-control" name="name" id="name" type="text" value="{{$photo->name}}">
+        </div>
 
-    </div>
-</form>
+        @include("images.partials.fileupload")
 
-@endsection
+        <div class="form-group">
+            <label for="description">Descrizione</label>
+            <textarea class="form-control" name="description" id="description"
+                type="text">{{$photo->description}}</textarea>
+        </div>
+        <div class="form-group pt-4">
+            <button class="btn btn-primary">Salva</button>
+            <a href="{{route('albums.index')}}" class="btn btn-danger">Annulla</a>
+
+        </div>
+    </form>
+
+    @endsection

@@ -22,13 +22,13 @@ Route::get('/users', function(){
 
 Route::resource('albums', AlbumsController::class);
 Route::get('/albums/{album}/images', [AlbumsController::class, 'getImages'])->name('albums.images');
+Route::resource('photos', PhotosController::class);
 // Route::delete('/albums/{album}/delete', [AlbumsController::class, 'delete']);
 
 Route::get('/photo', function(){
     return Photo::paginate(5);
 });
 
-Route::resource('photos', PhotosController::class);
 
 // Route::get('usersnoalbums', function(){
 //     $usersnoalbum = DB::table('users as u')

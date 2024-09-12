@@ -27,12 +27,15 @@
             @endif
         </div>
         <div>
+            <a href="{{ route('photos.create') }}?album_id={{ $album->id }}" class="btn btn-primary">NEW IMAGE</a>
             @if($album->photos_count)
-            <a href="{{route('albums.images', $album)}}" class="btn btn-info">VIEW IMAGE({{$album->photos_count}})</a>
+                <a href="{{route('albums.images', $album)}}" class="btn btn-info">VIEW IMAGE({{$album->photos_count}})</a>
+                @else
+                <a href="#" disabled class="btn btn-default">NO IMAGES</a>
             @endif
             <a href="{{route('albums.edit', $album)}}" class="btn btn-warning">UPDATE</a>
-            {{-- <a href="{{route('albums.destroy', ['album' => $album->id])}}" class="btn btn-danger">DELETE</a> --}}
-            <a href="/albums/{{$album->id}}" class="btn btn-danger">DELETE</a>
+            <a href="{{route('albums.destroy', $album)}}" class="btn btn-danger">DELETE</a>
+            {{-- <a href="/albums/{{$album->id}}" class="btn btn-danger">DELETE</a> --}}
         </div>
     </li>
     @endforeach
