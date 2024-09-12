@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlbumRequest;
 use App\Models\Album;
 use App\Models\Photo;
 use Illuminate\Http\RedirectResponse;
@@ -32,7 +33,7 @@ class AlbumsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
         return view('albums.create-album')->withAlbum(new Album());
     }
@@ -40,7 +41,7 @@ class AlbumsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AlbumRequest $request)
     {
         $data = $request->only(['album_name', 'description']);
         $album = new Album();
@@ -102,7 +103,7 @@ class AlbumsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Album $album)
+    public function update(AlbumRequest $request, Album $album)
     {
         $data = $request->only(['album_name', 'description']);
         $album->album_name = $data['album_name'];

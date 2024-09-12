@@ -6,7 +6,7 @@
 
 @extends('templates.default')
 @section('content')
-
+@include('partials.input-error')
 <h1>EDIT ALBUM {{$album->album_name}}</h1>
 <form method="POST" action="{{route('albums.update', ['album' => $album->id])}}" enctype="multipart/form-data">
     @csrf()
