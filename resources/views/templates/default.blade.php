@@ -28,7 +28,7 @@
 
     {{-- FOOTER --}}
     @section('footer')
-        @include('partials.footer')
+    @include('partials.footer')
     @show
 
 </body>
